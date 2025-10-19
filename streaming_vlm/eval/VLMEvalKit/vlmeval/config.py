@@ -1275,6 +1275,8 @@ qwen2vl_series = {
         total_pixels=24576 * 28 * 28,
         use_custom_prompt=False,
         max_new_tokens=1,
+        device_map='auto',
+        attn_implementation='sdpa',
     ),
     "Qwen2.5-VL-7B-Instruct": partial(
         Qwen2VLChat,
