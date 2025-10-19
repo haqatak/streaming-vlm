@@ -1,8 +1,8 @@
 from types import MethodType
 # patch incorrect liger kernel
-import liger_kernel.transformers.model.qwen2_5_vl as qwen2_5_vl
-from streaming_vlm.utils.patch_liger_kernel import lce_forward
-qwen2_5_vl.lce_forward = lce_forward
+# import liger_kernel.transformers.model.qwen2_5_vl as qwen2_5_vl
+# from streaming_vlm.utils.patch_liger_kernel import lce_forward
+# qwen2_5_vl.lce_forward = lce_forward
 
 from transformers.models.qwen2.modeling_qwen2 import Qwen2Model
 
@@ -68,11 +68,18 @@ if __name__ == "__main__":
     # Simple resume strategy: find the latest run with the same RUN_NAME, select the last checkpoint containing train_stats.json
     resume_ckpt = find_resume_checkpoint(training_args.run_name, training_args.output_dir)
 
+    device = "cpu"
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif torch.backends.mps.is_available():
+        device = "mps"
+
     config = AutoConfig.from_pretrained(model_args.pretrained_model_name_or_path, trust_remote_code=True)
     model = getattr(transformers, config.architectures[0]).from_pretrained(
             model_args.pretrained_model_name_or_path, 
-            torch_dtype="auto", attn_implementation='flash_attention_2'
-        )
+            torch_dtype="auto",
+            attn_implementation="sdpa"
+        ).to(device)
     model.get_rope_index = MethodType(get_rope_index, model)
     for m in ["visual", "vision_tower"]:
         try:

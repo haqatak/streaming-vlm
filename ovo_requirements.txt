@@ -22,7 +22,6 @@ einops==0.8.1
 fastapi==0.116.1
 ffmpy==0.6.1
 filelock==3.19.1
-flash_attn==2.8.3
 frozenlist==1.7.0
 fsspec==2025.9.0
 gpustat==1.1.1
@@ -39,7 +38,6 @@ huggingface-hub==0.34.4
 idna==3.10
 Jinja2==3.1.6
 jiter==0.10.0
-liger_kernel==0.6.2
 livecc-utils==0.0.2
 Markdown==3.9
 markdown-it-py==4.0.0
@@ -52,21 +50,6 @@ multiprocess==0.70.16
 networkx==3.5
 ninja==1.13.0
 numpy==1.24.4
-nvidia-cublas-cu12==12.6.4.1
-nvidia-cuda-cupti-cu12==12.6.80
-nvidia-cuda-nvrtc-cu12==12.6.77
-nvidia-cuda-runtime-cu12==12.6.77
-nvidia-cudnn-cu12==9.5.1.17
-nvidia-cufft-cu12==11.3.0.4
-nvidia-cufile-cu12==1.11.1.6
-nvidia-curand-cu12==10.3.7.77
-nvidia-cusolver-cu12==11.7.1.2
-nvidia-cusparse-cu12==12.5.4.2
-nvidia-cusparselt-cu12==0.6.3
-nvidia-ml-py==13.580.65
-nvidia-nccl-cu12==2.26.2
-nvidia-nvjitlink-cu12==12.6.85
-nvidia-nvtx-cu12==12.6.77
 openai==1.107.0
 opencv-python==4.11.0.86
 orjson==3.11.3
@@ -112,7 +95,6 @@ torchaudio==2.7.1
 torchvision==0.22.1
 tqdm==4.67.1
 transformers==4.51.3
-triton==3.3.1
 typer==0.17.4
 typing-inspection==0.4.1
 typing_extensions==4.15.0
