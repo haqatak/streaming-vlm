@@ -27,6 +27,23 @@ Go to [streamingvlm.hanlab.ai](https://streamingvlm.hanlab.ai) to see more cases
 
 *You can set up the environment by running the scripts above.*
 
+## 🍎 macOS Setup
+
+For macOS users with Apple Silicon, follow these steps to set up the environment:
+
+1.  **Create a virtual environment:**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+2.  **Install the dependencies:**
+    ```bash
+    pip install -r infer_requirements.txt
+    pip install -r sft_requirements.txt
+    ```
+*Note: The `ovo_requirements.txt` file is not required for the base installation.*
+
 ## 🚀 Inference
 
 <p align="center">

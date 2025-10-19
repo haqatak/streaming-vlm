@@ -68,18 +68,24 @@ def contiguous_id_and_kv(input_ids, past_key_values):
     return input_ids, past_key_values
 
 def load_model_and_processor(model_path, model_base = 'Qwen2_5'):
+    device = "cpu"
+    if torch.cuda.is_available():
+        device = "cuda"
+    elif torch.backends.mps.is_available():
+        device = "mps"
+
     if model_base == 'Qwen2_5':
         model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-            model_path, torch_dtype="auto", device_map="cuda",
-            attn_implementation="flash_attention_2" if torch.cuda.is_available() else "eager"
-        )
+            model_path, torch_dtype="auto",
+            attn_implementation="sdpa"
+        ).to(device)
         model = convert_qwen2_5_to_streaming(model)
         processor = AutoProcessor.from_pretrained(model_path, use_fast=False)
     elif model_base == 'Qwen2':
         model = Qwen2VLForConditionalGeneration.from_pretrained(
-            model_path, torch_dtype="auto", device_map="cuda",
-            attn_implementation="flash_attention_2" if torch.cuda.is_available() else "eager"
-        )
+            model_path, torch_dtype="auto",
+            attn_implementation="sdpa"
+        ).to(device)
         model = convert_qwen2_to_streaming(model)
         processor = AutoProcessor.from_pretrained(model_path, use_fast=False)
     return model, processor
